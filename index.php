@@ -31,7 +31,7 @@
     <link href="css/responsive.css" rel="stylesheet">
     <?php
 		$clr = array("blue", "yellow", "light-red", "light-green");
-		$w = array_rand($clr, 3);
+		$w = array_rand($clr, 2);
 	?>
     <!-- Colors CSS -->
     <link rel="stylesheet" type="text/css" href="css/color/<?php echo $clr[$w[0]];?>.css">
