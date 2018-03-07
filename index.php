@@ -46,8 +46,8 @@
     <link rel="stylesheet" type="text/css" href="css/color/yellow.css" title="yellow">
     <link rel="stylesheet" type="text/css" href="css/color/light-green.css" title="light-green">
 	-->
-    <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <!-- Custom Fonts >
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'-->
     
     
     <!-- Modernizer js -->
@@ -439,7 +439,27 @@
 		$testimonial[4][1] = "Praktisi Teknologi Informasi";
 		$testimonial[4][2] = "\"Sistem yang terintegrasi dalam suatu perusahaan dapat meningkatkan penghematan atau efisiensi\"";
 		$testimonial[4][3] = "face_5.png";
-		$tst = array_rand($key, 3);
+		$tst = array();
+		for($i = 0; $i<3; $i++)
+		{
+			$tst[$i] = rand(0,4);
+			if($i == 1)
+			{
+				do
+				{
+					$tst[1] = rand(0,4);
+				}
+				while($tst[1] == $tst[0]);
+			}
+			else if($i==2)
+			{
+				do
+				{
+					$tst[2] = rand(0,4);
+				}
+				while($tst[0] == $tst[2] || $tst[1] == $tst[2]);
+			}
+		}
 	?>
 	<!-- Start Testimonial Section -->
     <div id="testimonial" class="testimonial-section">
