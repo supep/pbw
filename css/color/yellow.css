@@ -1,7 +1,12 @@
 .text-primary {
     color: #FED136;
 }
-
+.chat_box {
+	background: #FED136;
+}
+.chat_box .header{
+	border-color: #FED136;
+}
 a {
     color: #FED136;
 }
@@ -13,7 +18,6 @@ a.active {
     color: #ea321e;
     text-decoration: none;
 }
-
 .btn-primary {
     border-color: #FED136;
     background-color: #FED136;

@@ -1,6 +1,12 @@
 .text-primary {
     color: #69D2E7;
 }
+.chat_box {
+	background: #69D2E7;
+}
+.chat_box .header{
+	border-color: #69D2E7;
+}
 
 a {
     color: #69D2E7;

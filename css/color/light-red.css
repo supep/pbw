@@ -2,6 +2,13 @@
     color: #FF432E;
 }
 
+.chat_box {
+	background: #FF432E;
+}
+.chat_box .header{
+	border-color: #FF432E;
+}
+
 a {
     color: #FF432E;
 }

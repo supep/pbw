@@ -29,13 +29,15 @@
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+	
+	<!-- ChatBox CSS -->
+    <link href="css/chatbox.css" rel="stylesheet" >
     <?php
 		$clr = array("blue", "yellow", "light-red", "light-green");
 		$w = array_rand($clr, 1);
 	?>
     <!-- Colors CSS -->
     <link rel="stylesheet" type="text/css" href="css/color/<?php echo $clr[$w];?>.css">
-    
     
     
     <!-- Colors CSS 
@@ -52,8 +54,6 @@
     
     <!-- Modernizer js -->
     <script src="js/modernizr.custom.js"></script>
-
-    
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -127,7 +127,7 @@
                             <h1 class="animated0">
                     		  <span>Selamat Datang di <br><br><strong>Teknologi Informasi</strong></span>
                     	    </h1>
-                            <a href="#feature" class="page-scroll btn btn-primary animated0">Read More</a>
+                            <a href="#portfolio" class="page-scroll btn btn-primary animated0">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                             <h1 class="animated1">
                                 <span>Membangun Negeri melalui <br><br><strong>Teknologi</strong></span>
                             </h1>
-                            <a href="#feature" class="page-scroll btn btn-primary animated1">Read More</a>
+                            <a href="#portfolio" class="page-scroll btn btn-primary animated1">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -693,6 +693,20 @@
         </div>
     </div>
 
+	<!--ChatBox-->
+	<div class="chat_box">
+	<div class="header close_btn">Chat Box 
+	</div>
+	<div class="toggle_chat" style="display:none;">
+		<div class="message_box">
+		</div>
+	<div class="user_info">
+		<input name="chat_username" id="chat_username" type="text" placeholder="Your Name" maxlength="15" required="required" data-error="Valid name is required." />
+		<input name="chat_message" id="chat_message" type="text" placeholder="Type Message Hit Enter" maxlength="100" required data-validation-required-message="Please enter a message."/> 
+	</div>
+	</div>
+	</div>
+	<!--End of ChatBox-->
     
 
     <!-- jQuery Version 2.1.1 -->
@@ -717,6 +731,94 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/script.js"></script>
+	<!-- ChatBox -->
+	<script type="text/javascript" src="libs/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+	// Muat pesan setiap 1000 milidetik dari server.
+	load_data = {'fetch':1};
+	window.setInterval(function(){
+	 $.post('chat.php', load_data,  function(data) {
+		$('.message_box').html(data);
+		var scrolltoh = $('.message_box')[0].scrollHeight;
+		$('.message_box').scrollTop(scrolltoh);
+	 });
+	}, 1000);
+	
+	//Metode untuk memicu saat pengguna menekan tombol enter
+	$("#chat_message").keypress(function(evt) {
+		if(evt.which == 13) {
+				var iusername = $('#chat_username').val();
+				var imessage = $('#chat_message').val();
+				post_data = {'username':iusername, 'message':imessage};
+			 	
+				
+				$.post('chat.php', post_data, function(data) {
+					
+					$(data).hide().appendTo('.message_box').fadeIn();
+	
+					//Terus  ke bawah obrolan!
+
+					var scrolltoh = $('.message_box')[0].scrollHeight;
+					$('.message_box').scrollTop(scrolltoh);
+					
+					//Reset nilai kotak pesan
+					$('#chat_message').val('');
+					
+				}).fail(function(err) { 
+				
+				//Peringatan kesalahan server HTTP
+				alert(err.statusText); 
+				});
+			}
+	});
+	$("#chat_username").keypress(function(evt) {
+		if(evt.which == 13) {
+				var iusername = $('#chat_username').val();
+				var imessage = $('#chat_message').val();
+				post_data = {'username':iusername, 'message':imessage};
+			 	
+				
+				$.post('chat.php', post_data, function(data) {
+					
+					$(data).hide().appendTo('.message_box').fadeIn();
+	
+					//Terus  ke bawah obrolan!
+
+					var scrolltoh = $('.message_box')[0].scrollHeight;
+					$('.message_box').scrollTop(scrolltoh);
+					
+					//Reset nilai kotak pesan
+					$('#chat_message').val('');
+					
+				}).fail(function(err) { 
+				
+				//Peringatan kesalahan server HTTP
+				alert(err.statusText); 
+				});
+			}
+	});
+	
+	//Toggle hide / show shoutbox
+	$(".close_btn").click(function (e) {
+			//get CSS display state of .toggle_chat element
+			var toggleState = $('.toggle_chat').css('display');
+			
+			//toggle show/hide chat box
+			$('.toggle_chat').slideToggle();
+		
+			//use toggleState var to change close/open icon image
+			if(toggleState == 'block')
+			{
+				$(".header div").attr('class', 'open_btn');
+			}else{
+				$(".header div").attr('class', 'close_btn');
+			}
+		});
+	});
+	</script>
+	<!-- End of ChatBox -->
 
 </body>
 
