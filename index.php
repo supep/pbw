@@ -1,825 +1,315 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-<head>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
 
-    <title>Departemen Teknologi Informasi, FTIK - ITS</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome CSS -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    
-    
-    <!-- Animate CSS -->
-    <link href="css/animate.css" rel="stylesheet" >
-    
-    <!-- Owl-Carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css" >
-    <link rel="stylesheet" href="css/owl.theme.css" >
-    <link rel="stylesheet" href="css/owl.transitions.css" >
-
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-	
-	<!-- ChatBox CSS -->
-    <link href="css/chatbox.css" rel="stylesheet" >
-    <?php
-		$clr = array("blue", "yellow", "light-red", "light-green");
-		$w = array_rand($clr, 1);
-	?>
-    <!-- Colors CSS -->
-    <link rel="stylesheet" type="text/css" href="css/color/<?php echo $clr[$w];?>.css">
-    
-    
-    <!-- Colors CSS 
-    <link rel="stylesheet" type="text/css" href="css/color/green.css" title="green">
-    <link rel="stylesheet" type="text/css" href="css/color/light-red.css" title="light-red">
-    <link rel="stylesheet" type="text/css" href="css/color/blue.css" title="blue">
-    <link rel="stylesheet" type="text/css" href="css/color/light-blue.css" title="light-blue">
-    <link rel="stylesheet" type="text/css" href="css/color/yellow.css" title="yellow">
-    <link rel="stylesheet" type="text/css" href="css/color/light-green.css" title="light-green">
-	-->
-    <!-- Custom Fonts >
-    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'-->
-    
-    
-    <!-- Modernizer js -->
-    <script src="js/modernizr.custom.js"></script>
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body class="index">
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Teknologi Informasi</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Fasilitas</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about-us">About</a>
-                    </li>
-					<li>
-                        <a class="page-scroll" href="#testimonial">Testimonials</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#service">Peluang Kerja</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    
-    <!-- Start Home Page Slider -->
-    <section id="page-top">
-        <!-- Carousel -->
-        <div id="main-slide" class="carousel slide" data-ride="carousel">
-
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#main-slide" data-slide-to="0" class="active"></li>
-                <li data-target="#main-slide" data-slide-to="1"></li>
-            </ol>
-            <!--/ Indicators end-->
-
-            <!-- Carousel inner -->
-            <div class="carousel-inner">
-                
-				<div class="item active">
-                    <img class="img-responsive" src="images/header_0.jpg" alt="slider">
-                    <div class="slider-content">
-                        <div class="col-md-12 text-center">
-                            <h1 class="animated0">
-                    		  <span>Selamat Datang di <br><br><strong>Teknologi Informasi</strong></span>
-                    	    </h1>
-                            <a href="#portfolio" class="page-scroll btn btn-primary animated0">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Carousel item end -->
-				<div class="item">
-                    <img class="img-responsive" src="images/header_1.jpg" alt="slider">
-                    <div class="slider-content">
-                        <div class="col-md-12 text-center">
-                            <h1 class="animated1">
-                                <span>Membangun Negeri melalui <br><br><strong>Teknologi</strong></span>
-                            </h1>
-                            <a href="#portfolio" class="page-scroll btn btn-primary animated1">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Carousel item end -->
-
-            </div>
-            <!-- Carousel inner end-->
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#main-slide" data-slide="prev">
-                <span><i class="fa fa-angle-left"></i></span>
-            </a>
-            <a class="right carousel-control" href="#main-slide" data-slide="next">
-                <span><i class="fa fa-angle-right"></i></span>
-            </a>
-        </div>
-        <!-- /carousel -->
-    </section>
-    <!-- End Home Page Slider -->
-
-    <!-- Start Portfolio Section -->
-        <section id="portfolio" class="portfolio-section-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title text-center">
-                            <h3>Fasilitas</h3>
-                            <p>Terdapat Fasilitas yang dapat menunjang pembelajaran</p>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                        <!-- Start Portfolio items -->
-                        <ul id="portfolio-list">
-                            <li>
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/baca_1.png" class="img-responsive" alt="" />
-                                    <div class="portfolio-caption">
-                                        <h4>Ruang Baca</h4>
-										<a href="#portfolio-modal1" data-toggle="modal" class="link-1"><i class="fa fa-compress"></i></a>
-										<a href="#portfolio-modal1" data-toggle="modal" class="link-2"><i class="fa fa-compress"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/kelas_1.png" class="img-responsive" alt="" />
-                                    <div class="portfolio-caption">
-                                        <h4>Ruang Kelas</h4>
-										<a href="#portfolio-modal2" data-toggle="modal" class="link-1"><i class="fa fa-compress"></i></a>
-										<a href="#portfolio-modal2" data-toggle="modal" class="link-2"><i class="fa fa-compress"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="portfolio-item">
-                                    <img src="images/portfolio/lab_1.png" class="img-responsive" alt="" />
-                                    <div class="portfolio-caption">
-                                        <h4>Laboratorium</h4>
-										<a href="#portfolio-modal3" data-toggle="modal" class="link-1"><i class="fa fa-compress"></i></a>
-										<a href="#portfolio-modal3" data-toggle="modal" class="link-2"><i class="fa fa-compress"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            
-                        </ul>
-                        <!-- End Portfolio items -->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Portfolio Section -->    
-    <!-- Start Portfolio Modal Section -->
-        <div class="section-modal modal fade" id="portfolio-modal1" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Ruang Baca</h3>
-                            <p>Memiliki berbagai macam koleksi mulai dari fiksi hingga materi perkuliahan, dari bahan cetak hingga koleksi digital seperti CD-ROM, CD, VCD dan DVD. Selain itu juga menyediakan publikasi serial harian dan bulanan seperti surat kabar dann majalah.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        
-                        <div class="col-md-6">
-                            <img src="images/portfolio/baca_1.png" class="img-responsive" alt="..">
-                        </div>
-						<div class="col-md-6">
-                            <img src="images/portfolio/baca_1.png" class="img-responsive" alt="..">
-                        </div>
-                        
-                    </div><!-- /.row -->
-                </div>                
-            </div>
-        </div>
-		
-		<div class="section-modal modal fade" id="portfolio-modal2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Ruang Kelas</h3>
-                            <p>Setiap ruang kelas dilengkapi dengan pendingin ruangan dan LCD serta akses internet gratis yang dapat mendukung kegiatan akademis mahasiswa</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        
-                        <div class="col-md-6">
-                            <img src="images/portfolio/kelas_1.png" class="img-responsive" alt="..">
-                        </div>
-                        <div class="col-md-6">
-                            <img src="images/portfolio/kelas_1.png" class="img-responsive" alt="..">
-                        </div>
-                        
-                    </div><!-- /.row -->
-                </div>                
-            </div>
-        </div>
-		
-		<div class="section-modal modal fade" id="portfolio-modal3" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title text-center">
-                            <h3>Laboratorium</h3>
-                            <p>Terdapat 2 laboratorium komputer (Lab Keamanan Siber dan Lab Teknologi Smart City). Seluruh Komputer telah dilengkapi oleh perangkat lunak yang dapat digunakan untuk mendukung kegiatan praktikum maupun kegiatan akademis lainnya.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        
-                        <div class="col-md-6">
-                            <img src="images/portfolio/lab_1.png" class="img-responsive" alt="..">
-                        </div>
-                        <div class="col-md-6">
-                            <img src="images/portfolio/lab_1.png" class="img-responsive" alt="..">
-                        </div>
-                        
-                    </div><!-- /.row -->
-                </div>                
-            </div>
-        </div>
-        <!-- End Portfolio Modal Section -->
-    <!-- Start About Us Section -->
-    <section id="about-us" class="about-us-section-1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="section-title text-center">
-                            <h3>Mengapa Teknologi Informasi?</h3>
-							<div class = "text-justify">
-							<br>
-								<ol>
-									<li style="list-style:decimal;">Saat ini banyak terdapat <i>hacker</i> di dunia siber. oleh karena itu diperlukan ahli keamanan siber dan aplikasi untuk mengurangi penipuan(<i>fraud</i>).</li>
-									<li style="list-style:decimal;">Program Studi Teknologi Informasi dapat mencetak lulusan yang mempunyai keahlian di bidang layanan awan, yang berkontribusi dalam meningkatkan kuantitas dan kualitas SDM, sehingga dapat meningkatkan efisiensi operasional organisasi.</li>
-									<li style="list-style:decimal;">Memiliki kemampuan untuk menghasilkan SDM yang ahli dalam bidang integrasi sistem sebagai solusi untuk mendukung penanganan aplikasi-aplikasi di instansi pemerintahan (E-Gov).</li>
-									<li style="list-style:decimal;">Memfasilitasi otomatisasi proses bisnis di organisasi untuk menghadapi perkembangan teknologi internet yang pesat dalam rangka mendukung pengembangan Teknologi <i>Smart City</i>.</li>
-								</ol>
-							</div>
-                        </div>
-                </div>
-            </div>
-            <div class="row">
-                
-                <div class="col-md-6">
-                    <div class="welcome-section text-center">
-                        <h3>Visi</h3>
-                        <div class="border"></div>
-                        <br>
-						<li class = "text-justify">Menjadi Program Studi Teknologi Informasi yang unggul dalam bidang keamanan siber dan Teknologi berbasis Internet (<i>Internet of Things</i>) untuk mendukung pembangunan <i>Smart City</i> secara berkelanjutan hingga tahun 2022.</li>
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="welcome-section text-center">
-                        <h3>Misi</h3>
-                        <div class="border"></div>
-                        <br>
-						<ol class = "text-justify">
-							<li style="list-style:decimal;">Menyelenggarakan pendidikan dan pengajaran Teknologi Informasi dengan menggunakan kurikulum yang adaptif, berorientasi ke masa depan dan didukung SDM yang berkualitas serta fasilitas yang memadai.</li>
-							<li style="list-style:decimal;">Melaksanakan penelitian yang bermutu di bidang Keamanan Siber dan <i>Internet of Things</i> untuk teknologi <i>Smart City</i>.</li>
-							<li style="list-style:decimal;">Menjalin kemitraan dengan instansi dalam maupun luar negeri.</li>
-							<li style="list-style:decimal;">Menyelenggarakan pengabdian kepada masyarakat berupa pelatihan, penyuluhan, penerapan hasil penelitian untuk pengembangan potensi dan pemberdayaan masyarakat daerah.</li>
-						</ol>
-                    </div>
-                </div>
-                
-            </div><!-- /.row -->            
-            
-        </div><!-- /.container -->
-    </section>
-    <!-- End About Us Section -->
-
-
-    <!-- Start About Us Section 2 -->
-    <div class="about-us-section-2">
-        <div class="container">
-            <div class="row">
-				<div class="col-md-12">
-					<div class="section-title text-center">
-						<h3>Profil Lulusan</h3>
-						<br>
-					</div>
-				</div>
-                    <div class="col-md-2 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-mobile-phone"></i>
-                            <div class="feature-content">
-                                <h4>Analis Keamanan Aplikasi</h4>
-                                <p>(Application Security Analist)</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-2 -->
-					<div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-globe"></i>
-                            <div class="feature-content">
-                                <h4>Spesialis Internet of Things</h4>
-                                <p>(IoT Specialist)</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-3 -->
-					<div class="col-md-2 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-cloud"></i>
-                            <div class="feature-content">
-                                <h4>Pengembangan Layanan Awan</h4>
-                                <p>(Cloud Service Developer)</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-2 -->
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-exchange"></i>
-                            <div class="feature-content">
-                                <h4>Spesialis Integrasi Sistem</h4>
-                                <p>(System Integration Specialist)</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-3 -->
-					<div class="col-md-2 col-sm-6 col-xs-12">
-                        <div class="feature">
-                            <i class="fa fa-lock"></i>
-                            <div class="feature-content">
-                                <h4>Spesialis Keamanan Siber</h4>
-                                <p>(Cyber Security Specialist)</p>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-2 -->
-                </div><!-- /.row --> 
-        </div>
-    </div>
-    <!-- Start About Us Section 2 -->
-
-	<?php
-		$key = array(1, 2, 3, 4, 5);
-		$testimonial = array();
-		$testimonial[0][0] = "Wiranto";
-		$testimonial[0][1] = "Menko Polhukam";
-		$testimonial[0][2] = "\"Kegiatan siber nasional terutama pengamanan siber ini merupakan keharusan, keniscayaan..\"";
-		$testimonial[0][3] = "face_1.png";
-		$testimonial[1][0] = "John McCarthy";
-		$testimonial[1][1] = "Pakar Komputasi MIT";
-		$testimonial[1][2] = "\"Suatu hari nanti komputasi akan menjadi infrastruktur publik seperti listrik dan telepon\"";
-		$testimonial[1][3] = "face_2.png";
-		$testimonial[2][0] = "Rudiantara";
-		$testimonial[2][1] = "Menkominfo";
-		$testimonial[2][2] = "\"Smart City menciptakan perubahan sistem lebih efektif dan efisien dalam lembaga pemerintahan\"";
-		$testimonial[2][3] = "face_3.png";
-		$testimonial[3][0] = "Bill Gates";
-		$testimonial[3][1] = "Microsoft";
-		$testimonial[3][2] = "\"Jika kita tidak memecahkan masalah keamanan, maka orang-orang akan ragu\"";
-		$testimonial[3][3] = "face_4.png";
-		$testimonial[4][0] = "Darwin Widjaja";
-		$testimonial[4][1] = "Praktisi Teknologi Informasi";
-		$testimonial[4][2] = "\"Sistem yang terintegrasi dalam suatu perusahaan dapat meningkatkan penghematan atau efisiensi\"";
-		$testimonial[4][3] = "face_5.png";
-		$tst = array();
-		for($i = 0; $i<3; $i++)
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
 		{
-			$tst[$i] = rand(0,4);
-			if($i == 1)
-			{
-				do
-				{
-					$tst[1] = rand(0,4);
-				}
-				while($tst[1] == $tst[0]);
-			}
-			else if($i==2)
-			{
-				do
-				{
-					$tst[2] = rand(0,4);
-				}
-				while($tst[0] == $tst[2] || $tst[1] == $tst[2]);
-			}
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
 		}
-	?>
-	<!-- Start Testimonial Section -->
-    <div id="testimonial" class="testimonial-section">
-        <div class="container">
-            <!-- Start Testimonials Carousel -->
-			<div class="section-title text-center">
-                        <h3 class = "white-text">Apa Kata Mereka?</h3>
-                        <p class  = "white-text" >Testimoni dari para ahli</p>
-                    </div>
-            <div id="testimonial-carousel" class="testimonials-carousel">
-                <!-- Testimonial 1 -->
-                <div class="testimonials item">
-                    <div class="testimonial-content">
-                        <img src="images/testimonial/<?php echo $testimonial[$tst[2]][3];?>" alt="" >
-                        <div class="testimonial-author">
-                            <div class="author"><?php echo $testimonial[$tst[2]][0];?></div>
-                            <div class="designation"><?php echo $testimonial[$tst[2]][1];?></div>
-                        </div>
-                        <p><?php echo $testimonial[$tst[2]][2];?></p>
-                    </div>
-                </div>
-                <!-- Testimonial 2 -->
-                <div class="testimonials item">
-                    <div class="testimonial-content">
-                        <img src="images/testimonial/<?php echo $testimonial[$tst[1]][3];?>" alt="" >
-                        <div class="testimonial-author">
-                            <div class="author"><?php echo $testimonial[$tst[1]][0];?></div>
-                            <div class="designation"><?php echo $testimonial[$tst[1]][1];?></div>
-                        </div>
-                        <p><?php echo $testimonial[$tst[1]][2];?></p>
-                    </div>
-                </div>
-                <!-- Testimonial 3 -->
-                <div class="testimonials item">
-                    <div class="testimonial-content">
-                        <img src="images/testimonial/<?php echo $testimonial[$tst[0]][3];?>" alt="" >
-                        <div class="testimonial-author">
-                            <div class="author"><?php echo $testimonial[$tst[0]][0];?></div>
-                            <div class="designation"><?php echo $testimonial[$tst[0]][1];?></div>
-                        </div>
-                        <p><?php echo $testimonial[$tst[0]][2];?></p>
-                    </div>
-                </div>
-            </div>
-            <!-- End Testimonials Carousel -->
-        </div>
-    </div>
-    <!-- End Testimonial Section -->
-	
-    <!-- Start Feature Section -->
-        <section id="service" class="services-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title text-center">
-                            <h3>Jenis Peluang Kerja</h3>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="feature-2">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <i class="fa fa-cloud"></i>
-                                    <div class="border"></div>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Komputasi Awan dan Komputasi Terdistribusi</h4>
-                                    <p>(Cloud and Distributed Computing)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-4 -->
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="feature-2">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <i class="fa fa-android"></i>
-                                    <div class="border"></div>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Integrasi Perangkat Lunak dan Middleware</h4>
-                                    <p>(Middleware and Integration Software)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-4 -->
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="feature-2">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <i class="fa fa-edit"></i>
-                                    <div class="border"></div>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Rancangan Antarmuka Pengguna</h4>
-                                    <p>(User Interface Design)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-4 -->
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="feature-2">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <i class="fa fa-lock"></i>
-                                    <div class="border"></div>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Keamanan Informasi dan Jaringan</h4>
-                                    <p>(Network and Information Security)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-4 -->
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="feature-2">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <i class="fa fa-hdd-o"></i>
-                                    <div class="border"></div>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Manajemen Penyimpanan Data</h4>
-                                    <p>(Storage Systems and Management)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-4 -->
-					<div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="feature-2">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <i class="fa fa-code"></i>
-                                    <div class="border"></div>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Arsitektur Web dan Pengembangan Framework</h4>
-                                    <p>(Web Architecture and Development Framework)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.col-md-4 -->
-                    
-                </div><!-- /.row -->
-            
-            </div><!-- /.container -->
-        </section>
-        <!-- End Feature Section -->
-    
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title text-center">
-                        <h3>Hubungi Kami</h3>
-                        <p class="white-text"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-					<div class="col-lg-6">
-						<form name="sentMessage" id="contactForm" method="post" action ="/mail/contact_me.php">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
-										<p class="help-block text-danger"></p>
-									</div>
-									<div class="form-group">
-										<input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
-										<p class="help-block text-danger"></p>
-									</div>
-									<div class="form-group">
-										<input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
-										<p class="help-block text-danger"></p>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
-										<p class="help-block text-danger"></p>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-								<div class="col-md-12 text-center">
-									<div id="success"></div>
-									<button type="submit" class="btn btn-primary">Send Message</button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="col-lg-6">
-						<div class="footer-contact-info text-left">
-							<h4 class= "text-center">Contact info</h4>
-							<h5><strong>Departemen Teknologi Informasi</strong></h5>
-							<ul>
-								<li><strong>Fakultas Teknologi Informasi dan Komunikasi</strong></li>
-								<li><strong>Institut Teknologi Sepuluh Nopember</strong></li>
-								<li><strong>Kampus ITS Sukolilo, Surabaya, 60111</strong></li>
-								<br>
-								<li><strong>E-mail :</strong> teknologi.informasi@its.ac.id </li>
-								<li><strong>Telp :</strong> +62xxxxxxx</li>
-								<li><strong>Fax :</strong> +62xxxxxxx</li>
-								<li><strong>Web :</strong> tipbw.000webhostapp.com</li>
-							</ul>
-						</div>
-					</div>
-                </div>
-            </div>
-        </div>
-        <footer class="style-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-4 col-xs-12 text-center">
-                        <span class="copyright">Copyright &copy; Teknologi Informasi</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </section>
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
+
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
+
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
+
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
 
-    <div id="loader">
-        <div class="spinner">
-            <div class="dot1"></div>
-            <div class="dot2"></div>
-        </div>
-    </div>
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
 
-	<!--ChatBox-->
-	<div class="chat_box">
-	<div class="header close_btn">Chat Box 
-	</div>
-	<div class="toggle_chat" style="display:none;">
-		<div class="message_box">
-		</div>
-	<div class="user_info">
-		<input name="chat_username" id="chat_username" type="text" placeholder="Your Name" maxlength="15" required="required" data-error="Valid name is required." />
-		<input name="chat_message" id="chat_message" type="text" placeholder="Type Message Hit Enter" maxlength="100" required data-validation-required-message="Please enter a message."/> 
-	</div>
-	</div>
-	</div>
-	<!--End of ChatBox-->
-    
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
 
-    <!-- jQuery Version 2.1.1 -->
-    <script src="js/jquery-2.1.1.min.js"></script>
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="asset/js/bootstrap.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/classie.js"></script>
-    <script src="js/count-to.js"></script>
-    <script src="js/jquery.appear.js"></script>
-    <script src="js/cbpAnimatedHeader.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.fitvids.js"></script>
-	<script src="js/styleswitcher.js"></script>
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="js/script.js"></script>
-	<!-- ChatBox -->
-	<script type="text/javascript" src="libs/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
 
-	// Muat pesan setiap 1000 milidetik dari server.
-	load_data = {'fetch':1};
-	window.setInterval(function(){
-	 $.post('chat.php', load_data,  function(data) {
-		$('.message_box').html(data);
-		var scrolltoh = $('.message_box')[0].scrollHeight;
-		$('.message_box').scrollTop(scrolltoh);
-	 });
-	}, 1000);
-	
-	//Metode untuk memicu saat pengguna menekan tombol enter
-	$("#chat_message").keypress(function(evt) {
-		if(evt.which == 13) {
-				var iusername = $('#chat_username').val();
-				var imessage = $('#chat_message').val();
-				post_data = {'username':iusername, 'message':imessage};
-			 	
-				
-				$.post('chat.php', post_data, function(data) {
-					
-					$(data).hide().appendTo('.message_box').fadeIn();
-	
-					//Terus  ke bawah obrolan!
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-					var scrolltoh = $('.message_box')[0].scrollHeight;
-					$('.message_box').scrollTop(scrolltoh);
-					
-					//Reset nilai kotak pesan
-					$('#chat_message').val('');
-					
-				}).fail(function(err) { 
-				
-				//Peringatan kesalahan server HTTP
-				alert(err.statusText); 
-				});
-			}
-	});
-	$("#chat_username").keypress(function(evt) {
-		if(evt.which == 13) {
-				var iusername = $('#chat_username').val();
-				var imessage = $('#chat_message').val();
-				post_data = {'username':iusername, 'message':imessage};
-			 	
-				
-				$.post('chat.php', post_data, function(data) {
-					
-					$(data).hide().appendTo('.message_box').fadeIn();
-	
-					//Terus  ke bawah obrolan!
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-					var scrolltoh = $('.message_box')[0].scrollHeight;
-					$('.message_box').scrollTop(scrolltoh);
-					
-					//Reset nilai kotak pesan
-					$('#chat_message').val('');
-					
-				}).fail(function(err) { 
-				
-				//Peringatan kesalahan server HTTP
-				alert(err.statusText); 
-				});
-			}
-	});
-	
-	//Toggle hide / show shoutbox
-	$(".close_btn").click(function (e) {
-			//get CSS display state of .toggle_chat element
-			var toggleState = $('.toggle_chat').css('display');
-			
-			//toggle show/hide chat box
-			$('.toggle_chat').slideToggle();
-		
-			//use toggleState var to change close/open icon image
-			if(toggleState == 'block')
-			{
-				$(".header div").attr('class', 'open_btn');
-			}else{
-				$(".header div").attr('class', 'close_btn');
-			}
-		});
-	});
-	</script>
-	<!-- End of ChatBox -->
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-</body>
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
 
-</html>
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// Path to the system directory
+	define('BASEPATH', $system_path);
+
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
+
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
