@@ -97,6 +97,9 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                    <li>
+                        <a class="page-scroll" href="<?php echo base_url("/bukuTamu")?>">Buku Tamu</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
