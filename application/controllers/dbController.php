@@ -1,0 +1,42 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class dbController extends CI_Controller {
+
+	public function __construct()
+	{
+		parent::__construct();
+		//Load Dependencies
+
+	}
+
+	// List all your items
+	public function index()
+	{
+		$data = $this->load->model('dbModel');
+		$data = $this->dbModel->getData('chat_box');
+		$data = array('data' => $data);
+
+	}
+
+	// Add a new item
+	public function add()
+	{
+
+	}
+
+	//Update one item
+	public function update( $id = NULL )
+	{
+
+	}
+
+	//Delete one item
+	public function delete( $id = NULL )
+	{
+
+	}
+}
+
+/* End of file crud.php */
+/* Location: ./application/controllers/crud.php */
